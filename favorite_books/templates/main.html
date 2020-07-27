@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">    
+    <!-- CHANGE CSS FILE LOCATION -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="{% static 'js/script.js' %}"></script> <!-- CHANGE JS FILE LOCATION -->
+    <title> Document </title>
+</head>
+
+<body class="thebod2">
+    <!-- HEADER SECTION -->
+    <div class="header_sec">
+        <h1 class="block1">Welcome {{user.first_name}}!</h1>
+        <a class="block3 btn btn-light" href="/logout">Log Out</a>
+    </div>
+
+    <hr class="header_line">
+
+    <!-- MAIN SECTION -->
+    <div class="main_section">
+        {% if messages %}
+        <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+        <!-- ADD BOOK SECTION -->
+        <div class="main_area_book ">
+            <div class=" col-5 add_book_area">
+                <h3>Add a Favorite Book</h3>
+                <form action="/add_book" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-3 col-form-label">Title</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="desc" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea rows="4" class="form-control" id="desc" name="desc"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-light btn-block">Add</button>
+                </form>
+            </div>
+            <!-- ALL BOOKS SECTION -->
+            <div class="book_section">
+                <h2>All Books</h2>
+                {%for book in book%}
+                <div class="feed_group">
+                    <a href='/book/{{book.id}}'>
+                        <h5>{{book.title}}</h5>
+                    </a>
+                    <p class="addby">(added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</p>
+                    {%for fav in favorite%}
+                    {%if book.id == fav.fav_book.id%}
+                    {%if user.id == fav.fav_user.id%}
+                    <h6 class=" favby "><i>This is one of your favorites</i></h6>
+                    {%endif%}
+                    {%endif%}
+                    {%endfor%}
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">    
+    <!-- CHANGE CSS FILE LOCATION -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="{% static 'js/script.js' %}"></script> <!-- CHANGE JS FILE LOCATION -->
+    <title> Document </title>
+</head>
+
+<body class="thebod2">
+
+    <div class="header_sec">
+        <h1 class="block1">Welcome {{user.first_name}}!</h1>
+        <a class="block2 btn btn-light" href="/books">Go Back</a>
+        <a class="block3_5 btn btn-light" href="/logout">Log Out</a>
+    </div>
+
+    <hr class="header_line">
+
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="main_area_book">
+        <!-- THE BOOK ITSELF -->
+        <div class=" view_book_area">
+            <form action="/book/{{book.id}}/edit" method="POST">
+                {% csrf_token %}
+                {%if user.id == book.uploaded_by.id%}
+                <p class="favby"><b>Update Title:</b></p>
+                <input type="text" placeholder="{{book.title}}" class="form-control" id="title" name="title">
+                {%else%}
+                <h1>{{book.title}}</h1>
+                {%endif%}
+                <div class="book_info">
+                    <p><b>Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</b></p>
+                    <p>Added on: {{book.created_at}}</p>
+                    <p>Last updated on: {{book.updated_at}}</p>
+                </div>
+                {%if user.id == book.uploaded_by.id%}
+                <p class="favby"><b>Update Description:</b></p>
+                <textarea rows="3" placeholder="{{book.desc}}" class=" favby form-control" id="desc"
+                    name="desc"></textarea>
+                {%else%}
+                <p><b>Description:</b> {{book.desc}}</p>
+                {%endif%}
+                {%if user.id == book.uploaded_by.id%}
+                <button type="submit" class=" addby btn btn-outline-light btn-block">Update</button>
+                <a href="/book/{{book.id}}/delete" class="favby btn btn-outline-danger btn-block">Delete</a>
+                {%endif%}
+            </form>
+        </div>
+        <!-- USER WHO LIKE THIS BOOK -->
+        <div class="view_book_area">
+            <h5>User Who Like This Book:</h5>
+            {%for fav in favorite%}
+            <ul>
+                {%if fav.fav_book.id == book.id%}
+                <li class="favby">
+                    {{fav.fav_user.first_name}} {{fav.fav_user.last_name}} {%if fav.fav_user.id == user.id%}<a
+                        class=" favby2  btn-outline-primary" href="/book/{{fav.fav_book.id}}/unlike"> Un
+                        Favorite</a>{%endif%}
+                </li>
+                {%endif%}
+            </ul>
+            {%endfor%}
+            {%if not request.session.favored%}
+            <a class="favby2 btn-outline-light" href=" /book/{{book.id}}/like">Add to Favorites</a>
+            {%endif%}
+        </div>
+    </div>
+</body>
+
+</html>

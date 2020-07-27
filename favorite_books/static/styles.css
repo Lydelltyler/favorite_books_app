@@ -1,0 +1,203 @@
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, form, ol, dl {
+    margin: 0px;
+    padding: 0px;
+}
+
+/************** LOGIN PAGE **************/
+
+.thebod {
+    background-color: rgb(164, 162, 170);
+}
+
+.thebod2 {
+    background-color: rgb(32, 32, 32);
+}
+
+.main_area {
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(180deg, rgb(83, 83, 83) 0%, rgba(32,32,32,1) 100%);
+    align-items: flex-start;
+    padding: 2em;
+    margin: 2em;
+}
+
+.sections {
+    width: 50%;
+    margin: 1em 1em 5em 2em;
+    color: white;
+    background: linear-gradient(180deg, #202020 0%, #464646 100%);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .8em;
+}
+
+.sections2 {
+    width: 50%;
+    margin: 5em 2em 5em 1em;
+    color: white;
+    background-color: rgb(32, 32, 32);
+    background: linear-gradient(180deg, #202020 0%, #464646 100%);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .8em;
+}
+
+.sections h3, .sections2 h3 {
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.messages {
+    color: white;
+    padding: .8em;
+    border: .1em rgba(246, 251, 255, 0.397) solid;
+    text-align: center;
+}
+
+/******** HEADER ********/
+
+.header_sec h1, .header_sec p {
+    margin-bottom: 0em;
+}
+
+.header_sec {
+
+}
+
+.block1 {
+    margin-left: 2em;
+    color: white;
+    display: inline-block;
+    text-align: left;
+}
+
+.block2 {
+    float: right;
+    margin: 0em 3em;
+
+}
+
+.block3 {
+    margin: 0em 3em;
+    float: right;
+}
+
+.block3_5 {
+    float: right;
+}
+
+
+
+/******** ADD BOOK ********/
+
+.main_area_book {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(65, 65, 65);
+    -webkit-box-shadow: -1px 2px 9px 1px rgba(0,0,0,0.75);
+    align-items: flex-start;
+    padding: 2em;
+    margin: 0em auto;
+    width: 60em;
+}
+
+.main_section {
+    padding: 2em;
+    margin: 0em auto;
+}
+
+.add_book_area {
+    color: white;
+    background: linear-gradient(180deg, #202020 0%, #464646 100%);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .8em;
+    margin-right: 6em;
+}
+
+.book_section {
+    color: white;
+    background-color: rgb(32, 32, 32);
+    background: linear-gradient(180deg, #202020 0%, #464646 100%);
+    -webkit-box-shadow: 10px 10px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .3em;
+}
+
+.feed_group {
+    background-color: rgb(53, 53, 53);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .7em;
+    margin: .3em;
+    text-align: center;
+}
+
+.book_section h5 {
+    margin-bottom: 0em;
+    margin-top: .5em;
+}
+
+.book_section h2 {
+    text-align: center;
+}
+
+.add_book_area h3 {
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.messages {
+    color: white;
+    padding: .8em;
+    border: .1em rgba(246, 251, 255, 0.397) solid;
+    text-align: center;
+}
+
+.addby {
+    margin-bottom: .2em;
+}
+
+.favby {
+    margin-top: 0em;
+    margin-bottom: .5em;
+}
+
+/* VIEW BOOK */
+
+.view_book_area {
+    color: white;
+    background-color: rgb(32, 32, 32);
+    background: linear-gradient(180deg, #202020 0%, #464646 100%);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .8em;
+    margin-right: 6em;
+    width: 50%;
+}
+
+.view_book_area h1 {
+    text-align: center;
+}
+
+.book_info {
+    background-color: rgb(53, 53, 53);
+    -webkit-box-shadow: 13px 13px 7px -9px rgba(0, 0, 0, 0.75);
+    border-radius: .3em;
+    padding: .7em;
+    margin: 1em .3em;
+    text-align: left;
+}
+
+.book_info p {
+    margin-bottom: .3em;
+}
+
+.favby2 {
+    width: 1em;
+    font-size: .6em;
+    border: solid .1em white;
+    border-radius: .3em;
+    padding: .2em;
+}
