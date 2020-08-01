@@ -45,11 +45,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     desc = models.TextField()
     uploaded_by = models.ForeignKey(User, related_name='books_uploaded', on_delete = models.CASCADE)
+    favorites = models.ManyToManyField(User, related_name='fav_book')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Favorite (models.Model):
-    fav_user = models.ForeignKey(User, related_name='f_user', on_delete = models.CASCADE)
-    fav_book = models.ForeignKey(Book, related_name='f_book', on_delete = models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)

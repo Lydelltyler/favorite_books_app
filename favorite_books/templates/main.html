@@ -61,18 +61,25 @@
                         <h5>{{book.title}}</h5>
                     </a>
                     <p class="addby">(added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</p>
-                    {%for fav in favorite%}
-                    {%if book.id == fav.fav_book.id%}
-                    {%if user.id == fav.fav_user.id%}
+                    {% if user in book.favorites.all %}
                     <h6 class=" favby "><i>This is one of your favorites</i></h6>
+                    {%else%}
+                    <a href="/book/{{book.id}}/like" class="btn btn-outline-primary">Add to fav</a>
                     {%endif%}
-                    {%endif%}
-                    {%endfor%}
                 </div>
                 {%endfor%}
             </div>
         </div>
     </div>
+    for x in all_books
+        flag = false
+        for y in all_user
+            if y == z:
+                flag = true
+        if flag == true
+            do sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc
+        else
+            do something else
 
 
 

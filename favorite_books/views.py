@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from datetime import datetime
-from .models import User, Book, Favorite
+from .models import User, Book
 from django.http import Http404
 import bcrypt
 
@@ -75,20 +75,13 @@ def books(request):
         id = request.session['userid']
         user = User.objects.get(id=id)
         all_books = Book.objects.all()
-        all_fav = Favorite.objects.all()
+        fav_books = Book.objects.first().favorites.all()
         context = {
             'user': user,
-            'favorite': all_fav,
-            'book': all_books
+            'book': all_books,
+            'fav': fav_books,
         }
-        def count_books(b):
-            if b > len(all_books):
-                count_books(b + 1)
-                
-    
-        
-        print(user.id)
-        print(Favorite.objects.filter(fav_book=True))
+        print(fav_books)
         return render(request, "main.html", context)
     else:
         raise Http404("NOT ALLOWED")
@@ -101,11 +94,12 @@ def show_book(request, id):
         user_id = request.session['userid']
         user = User.objects.get(id=user_id)
         view_book = Book.objects.get(id=book_id)
-        fav_books = Favorite.objects.filter(fav_book=view_book)
+        fav_books = Book.objects.first().favorites.all()
         request.session['favored'] = False
         for favbook in fav_books:
-            if favbook.fav_user.id == user.id:
+            if favbook.id == user.id:
                 request.session['favored'] = True
+                print(fav_books)
         context = {
             'book': view_book,
             'user': user,
@@ -150,8 +144,7 @@ def add_book(request):
                 title=title,
                 desc=desc,
                 uploaded_by=user)
-            fav = Favorite.objects.create(fav_user=user, fav_book=book)
-        print(f"this is the book has been added =>>>> {fav.fav_book.title} {id}")
+            book.favorites.add(user)
         return redirect('/books')
     else:
         raise Http404("NOT ALLOWED")
@@ -164,8 +157,7 @@ def unlike(request, id):
         user_id = request.session['userid']
         this_user = User.objects.get(id=user_id)
         this_book = Book.objects.get(id=book_id)
-        fav = Favorite.objects.get(fav_user=this_user, fav_book=this_book)
-        fav.delete()
+        this_book.favorites.remove(this_user)
         print(f" We Unliked =>>>> {this_book.title}")
         return redirect('/books')
     else:
@@ -177,8 +169,7 @@ def like(request, id):
         user_id = request.session['userid']
         this_user = User.objects.get(id=user_id)
         this_book = Book.objects.get(id=book_id)
-        
-        fav = Favorite.objects.create(fav_user=this_user, fav_book=this_book)
+        this_book.favorites.add(this_user)
         print(f" We liked =>>>> {this_book.title}")
         return redirect('/books')
     else:

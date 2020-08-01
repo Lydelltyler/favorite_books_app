@@ -63,12 +63,12 @@
         <!-- USER WHO LIKE THIS BOOK -->
         <div class="view_book_area">
             <h5>User Who Like This Book:</h5>
-            {%for fav in favorite%}
+            {%for userf in favorite%}
             <ul>
-                {%if fav.fav_book.id == book.id%}
+                {%if userf.id == user.id%}
                 <li class="favby">
-                    {{fav.fav_user.first_name}} {{fav.fav_user.last_name}} {%if fav.fav_user.id == user.id%}<a
-                        class=" favby2  btn-outline-primary" href="/book/{{fav.fav_book.id}}/unlike"> Un
+                    {{userf.first_name}} {{userf.last_name}} {%if userf.id == user.id%}<a
+                        class=" favby2  btn-outline-primary" href="/book/{{book.id}}/unlike"> Un
                         Favorite</a>{%endif%}
                 </li>
                 {%endif%}
